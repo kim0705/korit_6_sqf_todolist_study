@@ -37,8 +37,29 @@ export const reset = css`
         background-color: transparent;
     }
 
-    .ReactModal__Overlay {
-        background-color: transparent !important;
+    button:disabled {
+        color: #087fff40;
+        background-color: transparent;
+        cursor: default;
+    }
+
+    @keyframes registerModalContentOpen {
+        from {  
+            inset: auto 0 -650px; // psdding, margin처럼 한꺼번에 4방향으로 줄 수 있음
+        }
+        to {
+            inset: auto 0 0;
+        }
+    }
+
+    @keyframes registerModalContentClose {
+        from {
+            inset: auto 0 0;
+        }
+        to {  
+            inset: auto 0 -650px;
+        }
+        
     }
 
 `;
