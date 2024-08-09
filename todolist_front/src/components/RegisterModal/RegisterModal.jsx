@@ -16,7 +16,7 @@ function RegisterModal({ containerRef }) {
         setTimeout(() => {
             setAnimation("registerModalContentOpen");
             setOpen(false);
-        }, 400);
+        }, 500);
     }
 
     return (

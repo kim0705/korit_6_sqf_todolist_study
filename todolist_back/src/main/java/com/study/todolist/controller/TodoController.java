@@ -22,4 +22,15 @@ public class TodoController {
         return ResponseEntity.created(null).body(successCount); // created: 201
     }
 
+    @GetMapping("/todolist")
+    public ResponseEntity<?> getAll() {
+        log.info("getAll 호출");
+        return ResponseEntity.ok().body(todoService.getTodo());
+    }
+
+    @GetMapping("/todo/counts")
+    public ResponseEntity<?> getCounts() {
+        return ResponseEntity.ok().body(todoService.getTodoCounts());
+    }
+
 }

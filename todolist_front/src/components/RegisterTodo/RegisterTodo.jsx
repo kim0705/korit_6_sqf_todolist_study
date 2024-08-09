@@ -4,6 +4,7 @@ import * as s from './style';
 import ReactSelect from 'react-select';
 import { useEffect, useState } from 'react';
 import { addTodoApi } from '../../apis/todoApis/addTodo';
+import { refreshTodolistAtom } from '../../atoms/todolistAtom';
 
 function RegisterTodo({ closeModal }) {
     const importantOptions = [
@@ -15,6 +16,8 @@ function RegisterTodo({ closeModal }) {
         { label: "급함", value: 1, },
         { label: "급하지않음", value: 2, }
     ];
+
+    const setRefresh  = useSetRecoilState(refreshTodolistAtom);
 
     const [todo, setTodo] = useState({
         title: "",
@@ -61,6 +64,7 @@ function RegisterTodo({ closeModal }) {
     const handleSubmitClick = () => {
         console.log(todo);
         addTodoApi(todo);
+        setRefresh(true);
         closeModal();
     }
 
