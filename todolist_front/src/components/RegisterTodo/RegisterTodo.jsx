@@ -17,7 +17,7 @@ function RegisterTodo({ closeModal }) {
         { label: "급하지않음", value: 2, }
     ];
 
-    const setRefresh  = useSetRecoilState(refreshTodolistAtom);
+    const setRefresh = useSetRecoilState(refreshTodolistAtom);
 
     const [todo, setTodo] = useState({
         title: "",
