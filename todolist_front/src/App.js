@@ -7,6 +7,7 @@ import { reset } from './styles/common';
 import DanP from './pages/DanP/DanP';
 import MainLayout from './components/MainLayout/MainLayout';
 import Note from './pages/Note/Note';
+import Review from './pages/Review/Review';
 
 function App() {
     return (
@@ -19,7 +20,7 @@ function App() {
                     <Route path='/join' element={<></>} />
                     <Route path='/dp' element={<DanP />} />
                     <Route path='*' element={<NotFound />} />
-                    <Route path='/note' element={<Note />} />
+                    <Route path='/review' element={<Review />} />
                 </Routes>
             </MainLayout>
         </>
