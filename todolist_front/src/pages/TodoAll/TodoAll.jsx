@@ -71,7 +71,7 @@ function TodoAll(props) {
 
         setCalendar(<YearGroup calendarData={calendarData} />);
 
-    }, [todolistAll]);
+    },  [todolistAll]);
 
     return (
         <div>
