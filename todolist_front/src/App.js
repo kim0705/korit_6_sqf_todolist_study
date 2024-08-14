@@ -20,7 +20,7 @@ function App() {
                     <Route path='/join' element={<></>} />
                     <Route path='/dp' element={<DanP />} />
                     <Route path='*' element={<NotFound />} />
-                    <Route path='/review' element={<Review />} />
+                    {/* <Route path='/review' element={<Review />} /> */}
                 </Routes>
             </MainLayout>
         </>
