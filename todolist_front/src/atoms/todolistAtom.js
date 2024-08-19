@@ -1,5 +1,4 @@
 import { atom } from "recoil";
-import { getTodoAllApi } from "../apis/todoApis/getTodoApi";
 
 export const todolistAtom = atom({
     key: "todolistState",

@@ -10,11 +10,31 @@ import { useRecoilState } from 'recoil';
 import { todolistAtom } from '../../atoms/todolistAtom';
 import TodoCalendar from '../../components/TodoCalendar/TodoCalendar';
 import RegisterTodoButton from '../../components/RegisterTodoButton/RegisterTodoButton';
+import { modifyTodoAtom, selectedCalendarTodoAtom } from '../../atoms/calendarAtoms';
+import ConfirmButtonTop from '../../components/ConfirmButtonTop/ConfirmButtonTop';
 
 function TodoAll(props) {
     const [isShow, setShow] = useState(true);
     const [todolistAll] = useRecoilState(todolistAtom);
+    const [selectedTodo, setSelectedTodo] = useRecoilState(selectedCalendarTodoAtom);
     const [calendarData, setCalendarData] = useState({});
+    const [modifyTodo, setModifyTodo] = useRecoilState(modifyTodoAtom);
+    const [submitButtonDisabled, setSubmitButtonDisabled] = useState(true);
+
+    useEffect(() => {
+        let preTodo = {
+            ...(todolistAll.todolist.filter(todo =>
+                todo.todoId === modifyTodo?.todoId)[0])
+        };
+
+        preTodo = {
+            ...preTodo,
+            todoDateTime: preTodo?.todoDateTime?.replaceAll(" ", "T")
+        };
+        
+        const disabled = JSON.stringify(modifyTodo) === JSON.stringify(preTodo) || !modifyTodo?.title?.trim(); // JSON 문자열로 바꿔서 문자열 비교
+        setSubmitButtonDisabled(disabled);
+    }, [modifyTodo]);
 
     useEffect(() => {
         const obj = {
@@ -79,12 +99,25 @@ function TodoAll(props) {
 
     }, [todolistAll]);
 
+    const modifyCancel = () => {
+        setSelectedTodo(0);
+    }
+
+    const modifySubmit = () => {
+        console.log(modifyTodo);
+        setSelectedTodo(0);
+    }
+
     return (
         <div>
             <PageAnimationLayout isShow={isShow} setShow={setShow}>
                 <MainContainer>
                     <div css={s.layout}>
-                        <BackButtonTop setShow={setShow} />
+                        {
+                            selectedTodo === 0
+                                ? <BackButtonTop setShow={setShow} />
+                                : <ConfirmButtonTop onCancel={modifyCancel} onSubmit={modifySubmit} disabled={submitButtonDisabled} />
+                        }
                         <PageTitle title={MENUS.all.title} color={MENUS.all.color} />
                         <TodoCalendar calendarData={calendarData} />
                         <RegisterTodoButton />
