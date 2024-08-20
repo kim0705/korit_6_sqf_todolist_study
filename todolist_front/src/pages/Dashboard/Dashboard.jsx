@@ -11,6 +11,8 @@ import { useRecoilState, useSetRecoilState } from 'recoil';
 import { refreshTodolistAtom, todolistAtom } from '../../atoms/todolistAtom';
 import { getTodoAllApi, getTodoCountsApi } from '../../apis/todoApis/getTodoApi';
 import { useEffect } from 'react';
+import TodoComplete from '../TodoComplete/TodoComplete';
+import TodoImportant from '../TodoImportant/TodoImportant';
 
 function Dashboard(props) {
     const setTodolistAll = useSetRecoilState(todolistAtom);
@@ -48,6 +50,8 @@ function Dashboard(props) {
             </div>
             <Routes>
                 <Route path='/all' element={<TodoAll />} />
+                <Route path='/complete' element={<TodoComplete />} />
+                <Route path='/important' element={<TodoImportant />} />
             </Routes>
         </MainContainer>
     );

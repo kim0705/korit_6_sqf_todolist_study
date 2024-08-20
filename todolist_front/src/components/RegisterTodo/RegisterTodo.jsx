@@ -7,6 +7,7 @@ import { addTodoApi } from '../../apis/todoApis/addTodo';
 import { refreshTodolistAtom } from '../../atoms/todolistAtom';
 
 function RegisterTodo({ closeModal }) {
+
     const importantOptions = [
         { label: "중요함", value: 1, },
         { label: "중요하지않음", value: 2, }

@@ -6,6 +6,8 @@ import { refreshTodolistAtom } from '../../atoms/todolistAtom';
 import { modifyTodoAtom, selectedCalendarTodoAtom } from '../../atoms/calendarAtoms';
 import { useEffect } from 'react';
 import ReactSelect from 'react-select';
+import FullRedButton from '../FullRedButton/FullRedButton';
+import { deleteTodoApi } from '../../apis/todoApis/deleteTodoApi';
 
 function TodoBox({ todo }) {
 
@@ -25,9 +27,9 @@ function TodoBox({ todo }) {
 
     useEffect(() => { // 매번 초기화
         if (selectedTodo === todo.todoId) {
-            setModifytodo({ 
+            setModifytodo({
                 ...todo,
-                todoDateTime: todo.todoDateTime.replaceAll(" ", "T")    
+                todoDateTime: todo.todoDateTime.replaceAll(" ", "T")
             });
         }
     }, [selectedTodo]);
@@ -61,6 +63,12 @@ function TodoBox({ todo }) {
             ...modifyTodo,
             busy: option.value
         }));
+    }
+
+    const handleDeleteClick = async (todoId) => {
+        await deleteTodoApi(todoId);
+        setRefresh(true);
+        setSelectedTodo(0);
     }
 
     return <div css={s.todoBox}>
@@ -121,7 +129,7 @@ function TodoBox({ todo }) {
                             styles={{
                                 control: (style) => ({
                                     ...style,
-                                    marginBottom: "5px",
+                                    marginBottom: "10px",
                                     border: "none",
                                     outline: "none",
                                     boxShadow: "none",
@@ -139,6 +147,9 @@ function TodoBox({ todo }) {
                             options={busyOptions}
                             value={busyOptions.filter(option => option.value === modifyTodo.busy)[0]}
                         />
+                        <div css={s.deleteButton}>
+                            <FullRedButton onClick={() => handleDeleteClick(todo.todoId)}>삭제하기</FullRedButton>
+                        </div>
                     </div>
                 </>
             }

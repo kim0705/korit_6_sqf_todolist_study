@@ -42,6 +42,13 @@
         where
             todoId = #{todoId}
     </update>
+    <delete id="deleteByTodoId">
+        delete
+        from
+            todo_tb
+        where
+            todoId = #{todoId}
+    </delete>
     <select id="findAll" resultType="com.study.todolist.entity.Todo">
         select
             todoId,

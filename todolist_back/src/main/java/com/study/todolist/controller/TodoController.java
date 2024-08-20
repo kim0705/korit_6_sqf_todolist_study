@@ -41,14 +41,19 @@ public class TodoController {
 
     /**
      * ReqModifyTodoDto
-     * modifyTodo(todoService)
      * modifyTodoByTodoId(todoMapper)
+     * modifyTodo(todoService)
      */
 
     @PutMapping("/todo/{todoId}")
     public ResponseEntity<?> modify(@RequestBody ReqModifyTodoDto reqModifyTodoDto) {
         log.info("{}", reqModifyTodoDto);
         return ResponseEntity.ok().body(todoService.modifyTodo(reqModifyTodoDto));
+    }
+
+    @DeleteMapping("/todo/{todoId}")
+    public ResponseEntity<?> delete(@PathVariable int todoId) {
+        return ResponseEntity.ok().body(todoService.deleteTodo(todoId));
     }
 
 }
